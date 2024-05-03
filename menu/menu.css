@@ -1,0 +1,96 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.menu {
+    background-color: #005dca;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    
+}
+
+.menu-items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    
+}
+
+.menu-items li {
+    margin-right: 20px;
+}
+
+.menu-items li:last-child {
+    margin-right: 0;
+}
+
+.menu-items li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+    transition: background-color 0.3s;
+    border-radius: 5px;
+}
+
+.menu-items li a:hover {
+    background-color: #061f8b;
+}
+
+.logout {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 5px;
+    margin-left: auto;  
+
+}
+
+
+
+.logout:hover {
+    background-color: #061f8b;
+}
+
+
+nav {
+    margin-bottom: 10px;
+}
+
+.bienvenido {
+    font-size: 1rem;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    margin: auto ; /* Centro vertical y horizontal */
+    max-width: 100%; /* Para que el texto no sobrepase el ancho de la pantalla */
+    padding: 0 20px; /* Agregar espaciado horizontal */
+    flex: 1; /* Ocupar espacio restante en el contenedor */
+}
+
+  /* Resto de tus estilos CSS */
+
+
+
+.logo {
+    height: auto; /* Cambiar a 'auto' para mantener la proporción */
+    max-width: 17%; /* La imagen se ajustará al ancho del contenedor */
+    /* margin-right: 20px; */
+}
+
+/* Resto de tus estilos CSS */
+
+/* Media query para ajustar el tamaño de la imagen en pantallas pequeñas */
+@media only screen and (max-width: 768px) {
+    .logo {
+        max-width: 50%; /* Ajusta este valor según tus preferencias */
+        margin-right: 10px; /* Ajusta el margen para que no ocupe demasiado espacio */
+    }
+}
+
+
+
+
+/* Ajusta estos estilos según tus preferencias */

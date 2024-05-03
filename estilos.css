@@ -1,0 +1,77 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #7dbbfd;
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.login-form {
+    background-color: #1d1acc;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center; /* Alineación de texto para centrar elementos internos */
+}
+
+.logo-container {
+    margin-bottom: 20px;
+}
+
+.logo-container img {
+    max-width: 250px;
+    height: auto;
+    display: block; /* Para centrar correctamente la imagen */
+    margin: 0 auto; /* Centrar la imagen horizontalmente */
+}
+
+.input-group {
+    margin-bottom: 10px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 7px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+h2, label, a{
+    color:white;
+}
+a{
+    text-decoration: none;
+}
+a:hover{
+    color: #0056b3;
+}
+p{
+    font-size: 15px;
+}
