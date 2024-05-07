@@ -14,17 +14,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
     <link href="https://cdn.www.gov.co/layout/v4/all.css" rel="stylesheet">
-    <link rel="icon" type="image/png" href="migracion_temp\images\favicon.png" />
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="migracion_temp\css\styles.css">
+    <link rel="stylesheet" href="./css/styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
         integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <link rel="stylesheet" href="estilos_login\estilos.css">
+        <link rel="stylesheet" href="estilos.css">
 
 </head>
 
@@ -34,7 +34,7 @@
             <div class="row">
                 <div class="col-lg-2 col-sm-2 col-3 he_logo d-flex justify-content-start">
                     <a href="https://www.gov.co/">
-                        <img src="migracion_temp\images\logo\logo_gov.png" alt="LogoGov" class="py-1" />
+                        <img src="../migracion_temp/images/logo/logo_gov.png" alt="LogoGov" class="py-1" />
                     </a>
                 </div>
             </div>
@@ -42,35 +42,23 @@
     </header>
 
     <div class="login-container">
-        <form class="login-form" method="POST" action="creando_usuario.php">
+        <form class="login-form" method="POST" action="evaluar_usuario.php">
             <div class="logo-container">
-            <img src="migracion_temp\images\migracion_logo.png" alt="Logo">
+                <img src="..\migracion_temp\images\migracion_logo.png" alt="Logo">
             </div>
-            <h2>Registro</h2>
+            <h2>Biometrias</h2>
             <div class="input-group">
-                <label for="nombres">Nombres:</label>
-                <input type="text" id="nombres" name="nombres" required autocomplete="off" pattern="[A-ZÑÁÉÍÓÚáéíóú a-z]+" >
-            </div>
-            <div class="input-group">
-                <label for="apellidos">Apellidos:</label>
-                <input type="text" id="apellidos" name="apellidos" required autocomplete="off" pattern="[A-ZÑÁÉÍÓÚáéíóú a-z]+" >
-            </div>
-            <div class="input-group">
-                <label for="email">Correo corporativo:</label>
-                <input type="email" id="email" name="email" required autocomplete="onn">
-            </div>
-            <div class="input-group">
-                <label for="documento">Documento:</label>
-                <input type="text" id="documento" name="documento"required autocomplete="onn"  pattern="[0-9]+">
+                <label for="documento">Número de Documento:</label>
+                <input type="text" id="documento" name="documento" required>
             </div>
             <div class="input-group">
                 <label for="password">Contraseña:</label>
-                <input type="password" id="password" name="password" required autocomplete="off"  >
+                <input type="password" id="password" name="password" required>
             </div>
-            <a class="text-reg" link href="index.php"> <p >¿Ya está registrado? Inicie sesión</p> </a> </br>
-            <button type="submit">REGISTRAR</button>
+            <a class="text-reg" link href="crear_usuario.php"> <p >¿No está registrado? REGÍSTRESE</p> </a> </br>
+            <a class="text-reg" link href="recuperar_contraseña.php"> <p >¿Olvidóoo la contraseña?</p> </a>
+            <button type="submit">Iniciar Sesión</button>
         </form>
-        
     </div>
     <footer ng-include="::main.htmlRoutes.footer">
         <div class="footer-down">
@@ -107,16 +95,16 @@
                                     <div class="footer-wLogo">
                                         <img class="footer-logo logo-one" loading="lazy"
                                             ng-if="main.firstLogo &amp;&amp; main.amountLogo === '2'"
-                                            ng-src="migracion_temp\images\logo\2463_logogobierno300x300_200x200.png"
+                                            ng-src="images/logo/2463_logogobierno300x300_200x200.png"
                                             alt="MIGRACIÓN COLOMBIA"
-                                            src="migracion_temp\images\logo\2463_logogobierno300x300_200x200.png">
+                                            src="images/logo/2463_logogobierno300x300_200x200.png">
 
                                         <div class="vertical-line"></div>
                                         <img class="footer-logo logo-two" loading="lazy"
                                             ng-if="main.lastLogo &amp;&amp; main.amountLogo === '2'"
                                             ng-src="images/logo/2464_logomigracion300x400_200x200.png"
                                             alt="MIGRACIÓN COLOMBIA"
-                                            src="migracion_temp\images\logo\2464_logomigracion300x400_200x200.png">
+                                            src="images/logo/2464_logomigracion300x400_200x200.png">
                                     </div>
                                     <div class="wrapFrame"><iframe src="https://horalegalnueva.inm.gov.co/inm/"
                                             width="510" height="100" align="right" frameborder="0"
@@ -216,7 +204,7 @@
             </div>
             <div class="container container--default d-flex justify-content-end"><a class="footer-credit text-white"
                     target="_blank" href="https://home.micolombiadigital.gov.co/territorial/" tabindex="212">Creado
-                    Ministerio TIC <img src="migracion_temp\images\colombia.png" alt="Bandera Colombia" class="logo-colflat"></a>
+                    Ministerio TIC <img src="images/colombia.png" alt="Bandera Colombia" class="logo-colflat"></a>
             </div>
         </div>
         <div class="content bg-footer">
@@ -226,13 +214,13 @@
                         <div class="pt-middle">
                             <div class="d-inline logo_co">
                                 <a href="https://www.colombia.co" class="no-bullets">
-                                    <img src="migracion_temp\images\logo_co_footer.png" alt="logo co"
+                                    <img src="../migracion_temp/images/logo/logo_co_footer.png" alt="logo co"
                                         class=" vr-separtor-gray-right pe-4">
                                 </a>
                             </div>
                             <div class="d-inline logo">
                                 <a href="https://www.gov.co" class="no-bullets ps-2">
-                                    <img src="migracion_temp\images\logo\logo_gov.png" alt="logo">
+                                    <img src="../migracion_temp/images/logo/logo_gov.png" alt="logo">
                                 </a>
                             </div>
                         </div>
@@ -245,20 +233,20 @@
         <ul class="accesibilidad-items">
             <li>
                 <a id="high_contrast" href="#" class="icon-contrast" title="Cambiar niveles de contraste">
-                    <img src="migracion_temp\images\ico\channels-616_icon_contrast.svg" alt="Botón contraste" class="img-fluid">
+                    <img src="../migracion_temp/images/ico/channels-616_icon_contrast.svg" alt="Botón contraste" class="img-fluid">
                     <span> Contraste </span>
                 </a>
             </li>
             <li>
                 <a id="a_less" href="#" class="icon-a-less" title="Reducir el tamaño del texto">
-                    <img src="migracion_temp\images\ico\channels-616_icon_less_size.svg" alt="Botón Reducir el tamaño del texto"
+                    <img src="../migracion_temp/images/ico/channels-616_icon_less_size.svg" alt="Botón Reducir el tamaño del texto"
                         class="img-fluid">
                     <span> Reducir letra </span>
                 </a>
             </li>
             <li>
                 <a id="a_more" href="#" class="icon-a-more" title="Aumentar el tamaño del texto">
-                    <img src="migracion_temp\images\ico\channels-616_icon_more_size.svg" alt="Botón Aumentar tamaño del texto"
+                    <img src="../migracion_temp/images/ico/channels-616_icon_more_size.svg" alt="Botón Aumentar tamaño del texto"
                         class="img-fluid">
                     <span> Aumentar letra </span>
                 </a>

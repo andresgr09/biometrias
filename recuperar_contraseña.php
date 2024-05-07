@@ -42,35 +42,18 @@
     </header>
 
     <div class="login-container">
-        <form class="login-form" method="POST" action="creando_usuario.php">
+        <form class="login-form" method="POST" action="evaluar_usuario.php">
             <div class="logo-container">
-            <img src="migracion_temp\images\migracion_logo.png" alt="Logo">
+                <img src="migracion_temp\images\migracion_logo.png" alt="Logo">
             </div>
-            <h2>Registro</h2>
+            <h2>Biometrias</h2>
             <div class="input-group">
-                <label for="nombres">Nombres:</label>
-                <input type="text" id="nombres" name="nombres" required autocomplete="off" pattern="[A-ZÑÁÉÍÓÚáéíóú a-z]+" >
+                <label for="correo">Correo corporativo:</label>
+                <input type="email" id="correo" name="documento" required>
             </div>
-            <div class="input-group">
-                <label for="apellidos">Apellidos:</label>
-                <input type="text" id="apellidos" name="apellidos" required autocomplete="off" pattern="[A-ZÑÁÉÍÓÚáéíóú a-z]+" >
-            </div>
-            <div class="input-group">
-                <label for="email">Correo corporativo:</label>
-                <input type="email" id="email" name="email" required autocomplete="onn">
-            </div>
-            <div class="input-group">
-                <label for="documento">Documento:</label>
-                <input type="text" id="documento" name="documento"required autocomplete="onn"  pattern="[0-9]+">
-            </div>
-            <div class="input-group">
-                <label for="password">Contraseña:</label>
-                <input type="password" id="password" name="password" required autocomplete="off"  >
-            </div>
-            <a class="text-reg" link href="index.php"> <p >¿Ya está registrado? Inicie sesión</p> </a> </br>
-            <button type="submit">REGISTRAR</button>
+            <a class="text-reg" link href="recuperar_contraseña.php"> <p >¿Olvidó la contraseña?</p> </a>
+            <button type="submit">Recuperar contraseña</button>
         </form>
-        
     </div>
     <footer ng-include="::main.htmlRoutes.footer">
         <div class="footer-down">
@@ -265,7 +248,7 @@
             </li>
         </ul>
     </div>
-    <script src="/js/accesibilidad.js"></script>
+    <script src="migracion_temp\js\accesibilidad.js"></script>
 
 
 
