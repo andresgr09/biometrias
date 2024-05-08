@@ -49,9 +49,9 @@
             <h2>Biometrias</h2>
             <div class="input-group">
                 <label for="correo">Correo corporativo:</label>
-                <input type="email" id="correo" name="documento" required>
+                <input type="email" id="correo" name="correo" placeholder="Ingrese su correo" required>
             </div>
-            <a class="text-reg" link href="recuperar_contraseña.php"> <p >¿Olvidó la contraseña?</p> </a>
+            <!-- <a class="text-reg" link href="recuperar_contraseña.php"> <p >¿Olvidó la contraseña?</p> </a> -->
             <button type="submit">Recuperar contraseña</button>
         </form>
     </div>

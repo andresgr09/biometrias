@@ -1,31 +1,31 @@
 import $ from "jquery";
 
-'use strict';
-
 $(document).ready(function () {
-    /*Aumentar tamaño de la fuente*/
+    /* Aumentar tamaño de la fuente */
     $('#a_more').click(function () {
         let curSize = parseInt($('html').css('font-size')) + 2;
         if (curSize <= 28)
-            $('html').css('font-size', curSize);
+            $('html').css('font-size', curSize + 'px');
     });
-    /*Disminuir tamaño de la fuente*/
+
+    /* Disminuir tamaño de la fuente */
     $('#a_less').click(function () {
         let curSize = parseInt($('html').css('font-size')) - 2;
         if (curSize >= 10)
-            $('html').css('font-size', curSize);
+            $('html').css('font-size', curSize + 'px');
     });
-    /*Reiniciar tamaño de la fuente*/
+
+    /* Reiniciar tamaño de la fuente */
     $('#a_normal').click(function () {
-        $('html').css('font-size', 'initial');
+        $('html').css('font-size', '16px'); // Asigna el tamaño de fuente inicial que desees aquí
     });
-    /*Alto contraste*/
+
+    /* Alto contraste */
     $('#high_contrast').click(function () {
         if ($('html').hasClass('altoContraste')) {
             $('html').removeClass('altoContraste');
             $(".navbar-default").removeClass("navbar-inverse");
-        }
-        else {
+        } else {
             $('html').addClass('altoContraste');
             $(".navbar-default").addClass("navbar-inverse");
         }

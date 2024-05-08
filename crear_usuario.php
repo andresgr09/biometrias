@@ -49,23 +49,23 @@
             <h2>Registro</h2>
             <div class="input-group">
                 <label for="nombres">Nombres:</label>
-                <input type="text" id="nombres" name="nombres" required autocomplete="off" pattern="[A-ZÑÁÉÍÓÚáéíóú a-z]+" >
+                <input type="text" id="nombres" name="nombres" required autocomplete="off" pattern="[A-ZÑÁÉÍÓÚáéíóú a-z]+" placeholder="Ingrese sus Nombre(s)" >
             </div>
             <div class="input-group">
                 <label for="apellidos">Apellidos:</label>
-                <input type="text" id="apellidos" name="apellidos" required autocomplete="off" pattern="[A-ZÑÁÉÍÓÚáéíóú a-z]+" >
+                <input type="text" id="apellidos" name="apellidos" required autocomplete="off" pattern="[A-ZÑÁÉÍÓÚáéíóú a-z]+"  placeholder="Ingrese sus Apellido(s)">
             </div>
             <div class="input-group">
                 <label for="email">Correo corporativo:</label>
-                <input type="email" id="email" name="email" required autocomplete="onn">
+                <input type="email" id="email" name="email" required autocomplete="off" placeholder="Ingrese correo corporativo">
             </div>
             <div class="input-group">
                 <label for="documento">Documento:</label>
-                <input type="text" id="documento" name="documento"required autocomplete="onn"  pattern="[0-9]+">
+                <input type="text" id="documento" name="documento"required autocomplete="onn"  pattern="[0-9]+" placeholder="Ingrese nro de documento">
             </div>
             <div class="input-group">
                 <label for="password">Contraseña:</label>
-                <input type="password" id="password" name="password" required autocomplete="off"  >
+                <input type="password" id="password" name="password" required autocomplete="off" placeholder="Ingrese contraseña" >
             </div>
             <a class="text-reg" link href="index.php"> <p >¿Ya está registrado? Inicie sesión</p> </a> </br>
             <button type="submit">REGISTRAR</button>
@@ -265,7 +265,7 @@
             </li>
         </ul>
     </div>
-    <script src="/js/accesibilidad.js"></script>
+    <script src="accesibilidad.js"></script>
 
 
 

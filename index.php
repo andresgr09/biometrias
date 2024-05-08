@@ -46,14 +46,14 @@
             <div class="logo-container">
                 <img src="migracion_temp\images\migracion_logo.png" alt="Logo">
             </div>
-            <h2>Biometrias Login</h2>
+            <h2>Biometrias</h2>
             <div class="input-group">
                 <label for="documento">Número de Documento:</label>
-                <input type="text" id="documento" name="documento" required>
+                <input type="text" id="documento" name="documento" placeholder="Ingrese nro de documento" required>
             </div>
             <div class="input-group">
                 <label for="password">Contraseña:</label>
-                <input type="password" id="password" name="password" required>
+                <input type="password" id="password" name="password" placeholder="Ingrese contraseña" required>
             </div>
             <a class="text-reg" link href="crear_usuario.php"> <p >¿No está registrado? REGÍSTRESE</p> </a> </br>
             <a class="text-reg" link href="recuperar_contraseña.php"> <p >¿Olvidó la contraseña?</p> </a>
