@@ -49,15 +49,15 @@
             <h2>Registro</h2>
             <div class="input-group">
                 <label for="nombres">Nombres:</label>
-                <input type="text" id="nombres" name="nombres" required autocomplete="off" pattern="[A-ZÑÁÉÍÓÚáéíóú a-z]+" placeholder="Ingrese sus Nombre(s)" >
+                <input type="text" id="nombres" name="nombres" required autocomplete="onn" pattern="[A-ZÑÁÉÍÓÚáéíóú a-z]+" placeholder="Ingrese sus Nombre(s)" >
             </div>
             <div class="input-group">
                 <label for="apellidos">Apellidos:</label>
-                <input type="text" id="apellidos" name="apellidos" required autocomplete="off" pattern="[A-ZÑÁÉÍÓÚáéíóú a-z]+"  placeholder="Ingrese sus Apellido(s)">
+                <input type="text" id="apellidos" name="apellidos" required autocomplete="onn" pattern="[A-ZÑÁÉÍÓÚáéíóú a-z]+"  placeholder="Ingrese sus Apellido(s)">
             </div>
             <div class="input-group">
                 <label for="email">Correo corporativo:</label>
-                <input type="email" id="email" name="email" required autocomplete="off" placeholder="Ingrese correo corporativo">
+                <input type="email" id="email" name="email" required autocomplete="onn" placeholder="Ingrese correo corporativo">
             </div>
             <div class="input-group">
                 <label for="documento">Documento:</label>
