@@ -44,7 +44,7 @@
     <div class="login-container">
         <form class="login-form" method="POST" action="evaluar_usuario.php">
             <div class="logo-container">
-                <img src="migracion_temp\images\migracion_logo.png" alt="Logo">
+               <a href="index.php"> <img src="migracion_temp\images\migracion_logo.png" alt="Logo" > </a>
             </div>
             <h2>Biometrias</h2>
             <div class="input-group">

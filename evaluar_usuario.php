@@ -2,6 +2,17 @@
 session_start();
 // require_once("seguridad.php");
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="ventana_emergente.css">
+</head>
+<body>
+    
+
 <?php
 class Usuario {
     public function evaluar($documento, $password) {
@@ -9,7 +20,7 @@ class Usuario {
         $cont = 0;
         
         include("conexion.php");
-        $sql = "SELECT * FROM usuarios WHERE nro_documento='$documento'";
+        $sql = "SELECT * FROM usuarios WHERE nro_documento='$documento' AND estado_confirmacion = 1";
         
         if (!$result = $db->query($sql)) {
             die('Hay un error corriendo en la consulta o datos no encontrados!!! [' . $db->error . ']');
@@ -27,7 +38,11 @@ class Usuario {
             echo "<h2>Bienvenido(a)  $nnombres </h2>";
             header("location:autenticacion_exitosa.php");
         } else {
-            echo'<script>alert("Datos incorrectos"); window.location = "http://localhost/biometrias/index.php";</script>';
+            echo" <div class='window-notice' id='window-notice'>";
+    echo"  <div class='content'>";
+    echo"      <div class='content-text'>Datos incorrectos <a href='index.php'>Volver a intentar. ";
+    echo" </div>";
+    echo"  </div>";
         }
     }
 }
@@ -35,3 +50,5 @@ class Usuario {
 $final = new Usuario();
 $final->evaluar($_POST["documento"], $_POST["password"]);
 ?>
+</body>
+</html>

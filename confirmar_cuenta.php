@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="ventana_emergente.css">
+    <title>Document</title>
+</head>
+<body>
+    
 <?php
 include("conexion.php");
 
@@ -5,8 +15,8 @@ include("conexion.php");
 // if(isset($_GET['hash'])) {
 //     $hash = $_GET['hash'];
 
-if(isset($_POST['hash'])) {
-    $hash = $_POST['hash'];
+if(isset($_GET['hash'])) {
+    $hash = $_GET['hash'];
     // Buscar el hash en la base de datos
     $sql = "SELECT * FROM usuarios WHERE hash = '$hash'";
     $result = $db->query($sql);
@@ -15,14 +25,33 @@ if(isset($_POST['hash'])) {
         // Actualizar el estado de confirmación del usuario a confirmado
         $sql_update = "UPDATE usuarios SET estado_confirmacion = 1 WHERE hash = '$hash'";
         if($db->query($sql_update)) {
-            echo "Tu cuenta ha sido confirmada correctamente. Ahora puedes iniciar sesión.";
+           echo" <div class='window-notice' id='window-notice'>";
+      echo"  <div class='content'>";
+      echo"      <div class='content-text'>Tu cuenta ha sido confirmada correctamente. <a href='index.php'>Ahora puedes iniciar sesión. ";
+       echo" </div>";
+  echo"  </div>";
         } else {
-            echo "Error al confirmar tu cuenta. Por favor, inténtalo de nuevo más tarde.";
+            echo" <div class='window-notice' id='window-notice'>";
+            echo"  <div class='content'>";
+            echo"      <div class='content-text'>Tu cuenta ha sido confirmada correctamente. <a href='index.php'>Ahora puedes iniciar sesión. ";
+            echo" </div>";
+            echo"  </div>";
         }
     } else {
-        echo "El enlace de confirmación es inválido o ha expirado.";
+        echo" <div class='window-notice' id='window-notice'>";
+        echo"  <div class='content'>";
+        echo"      <div class='content-text'>El enlace de confirmación es inválido o ha expirado. <a href='index.php'>Volver atras. ";
+        echo" </div>";
+        echo"  </div>";
     }
 } else {
-    echo "El enlace de confirmación es inválido o ha expirado.";
+
+    echo" <div class='window-notice' id='window-notice'>";
+    echo"  <div class='content'>";
+    echo"      <div class='content-text'>El enlace de confirmación es inválido o ha expirado. <a href='index.php'>Volver atras. ";
+    echo" </div>";
+    echo"  </div>";
 }
 ?>
+</body>
+</html>
