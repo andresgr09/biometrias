@@ -27,7 +27,12 @@
 }
 a{
     text-decoration: none;
+    text-align: center;
+    color: #3366cc;
 }
 a:hover{
     color: green;
+}
+.content-text{
+    text-align: center;
 }

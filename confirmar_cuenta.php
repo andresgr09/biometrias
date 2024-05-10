@@ -29,7 +29,7 @@ if(isset($_GET['identificador'])) {
         if($db->query($sql_update)) {
             echo "   <div class='window-notice' id='window-notice'>";
             echo "    <div class='content'>";
-            echo "<div class='content-text'>¡Tu cuenta ha sido confirmada correctamente.<a href='index.php'>  Ahora puedes iniciar sesión.! </a>";
+            echo "<div class='content-text'>¡Tu cuenta ha sido confirmada correctamente. <br> <a href='index.php'>  Ahora puedes iniciar sesión.! </a>";
             echo "       </div>";
             echo "   </div>";
         } else {
@@ -38,7 +38,7 @@ if(isset($_GET['identificador'])) {
     } else {
         echo "   <div class='window-notice' id='window-notice'>";
             echo "    <div class='content'>";
-            echo "<div class='content-text'>¡El enlace de confirmación es inválido o ha expirado.'><a href='index.php'>  Volver a intentar! </a>";
+            echo "<div class='content-text'>¡El enlace de confirmación es inválido o ha expirado. <br> <a href='index.php'>  Volver a intentar! </a>";
             echo "       </div>";
             echo "   </div>";
     }
@@ -46,7 +46,7 @@ if(isset($_GET['identificador'])) {
 
     echo "   <div class='window-notice' id='window-notice'>";
             echo "    <div class='content'>";
-            echo "<div class='content-text'>¡El enlace de confirmación es inválido o ha expirado.'><a href='index.php'>  Volver a intentar! </a>";
+            echo "<div class='content-text'>¡El enlace de confirmación es inválido o ha expirado. <br> <a href='index.php'>  Volver a intentar! </a>";
             echo "       </div>";
             echo "   </div>";
 }

@@ -121,19 +121,24 @@ if ($registro) {
     $correoConfirmacion = new CorreoConfirmacion();
     if ($correoConfirmacion->enviarCorreoConfirmacion($registro['email'], $registro['hash'])) {
         // Redirigir al usuario a la página de autenticación después de enviar el correo de confirmación
-        header("Location: autenticacion.php");
+        // header("Location: autenticacion.php");
+        echo "   <div class='window-notice' id='window-notice'>";
+        echo "    <div class='content'>";
+        echo" <div class='content-text'>¡Usuario registrado correctamente, confirme su registro en el correo electronico <br><a href='crear_usuario.php'> Iniciar sesion.! </a>";
+         echo "       </div>";
+         echo "   </div>";
         exit;
     } else {
         echo "   <div class='window-notice' id='window-notice'>";
         echo "    <div class='content'>";
-        echo" <div class='content-text'>¡Error al enviar el correo electrónico de confirmación. Por favor,<a href='crear_usuario.php'> inténtalo nuevamente.! </a>";
+        echo" <div class='content-text'>¡Error al enviar el correo electrónico de confirmación. Por favor, <br><a href='crear_usuario.php'> inténtalo nuevamente.! </a>";
          echo "       </div>";
          echo "   </div>";
     }
 } else {
     echo "   <div class='window-notice' id='window-notice'>";
     echo "    <div class='content'>";
-    echo "<div class='content-text'>¡Hubo un error al crear el usuario. Por favor, inténtalo nuevamente,<a href='crear_usuario.php'> inténtalo nuevamente.! </a>";
+    echo "<div class='content-text'>¡Hubo un error al crear el usuario. Por favor, inténtalo nuevamente,<br> <a href='crear_usuario.php'> inténtalo nuevamente.! </a>";
      echo "       </div>";
      echo "   </div>";
 }

@@ -1,3 +1,8 @@
+<?php
+require_once("seguridad.php");
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,8 +11,9 @@
     <title>Document</title>
 </head>
 <body>
-    <?php include("menu/menu.php")
+    <?php include("menu\menu.php")
 
 ?>    
+    
 </body>
 </html>
