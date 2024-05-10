@@ -42,7 +42,7 @@
     </header>
 
     <div class="login-container">
-        <form class="login-form" method="POST" action="evaluar_usuario.php">
+        <form class="login-form" method="POST" action="recuperando_contraseña.php">
             <div class="logo-container">
                <a href="index.php"> <img src="migracion_temp\images\migracion_logo.png" alt="Logo" > </a>
             </div>

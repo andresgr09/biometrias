@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="migracion_temp\images\favicon.png" />
     <link rel="stylesheet" href="ventana_emergente.css">
-    <title>Document</title>
+    <title>Creacion usuario</title>
 </head>
 <body>
     
 
 <?php
-
 include("conexion.php");
 
 class Usuario {
@@ -22,11 +22,12 @@ class Usuario {
         $result = $db->query($sql);
 
         if ($result->num_rows > 0) {
-            echo" <div class='window-notice' id='window-notice'>";
-            echo"  <div class='content'>";
-            echo"      <div class='content-text'>La cedula esta registrada con otro usurio!<a href='crear_usuario.php'>Volver a intentar.</a> ";
-            echo" </div>";
-            echo"  </div>";
+
+            echo "   <div class='window-notice' id='window-notice'>";
+        echo "    <div class='content'>";
+        echo" <div class='content-text'>¡La cédula ya está registrada con otro usuario!<a href='crear_usuario.php'> inténtalo nuevamente.! </a>";
+         echo "       </div>";
+         echo "   </div>";
             return false;
         }
 
@@ -35,23 +36,21 @@ class Usuario {
         $result = $db->query($sql);
 
         if ($result->num_rows > 0) {
-           
-            echo" <div class='window-notice' id='window-notice'>";
-            echo"  <div class='content'>";
-            echo"      <div class='content-text'>¡El correo ya está registrado con otro usuario<a href='crear_usuario.php'>Volver a intentar. </a>";
-            echo" </div>";
-            echo"  </div>";
+            echo "   <div class='window-notice' id='window-notice'>";
+        echo "    <div class='content'>";
+        echo" <div class='content-text'>¡El correo ya está registrado con otro usuario!<a href='crear_usuario.php'> inténtalo nuevamente.! </a>";
+         echo "       </div>";
+         echo "   </div>";
             return false;
         }
 
         // Verificar requisitos de contraseña
         if (strlen($password) < 8 || !preg_match("/[a-z]/", $password) || !preg_match("/[A-Z]/", $password) || !preg_match("/[0-9]/", $password) || !preg_match("/[!@#$%^&*()\-_=+{};:,<.>]/", $password)) {
-
-            echo" <div class='window-notice' id='window-notice'>";
-            echo"  <div class='content'>";
-            echo" <div class='content-text'>¡La contraseña debe contener al menos 8 caracteres, una letra mayúscula, una letra minúscula, un número y un carácter especial!<a href='crear_usuario.php'>Volver a intentar. </a>";
-            echo" </div>";
-            echo"  </div>";
+        echo "   <div class='window-notice' id='window-notice'>";
+        echo "    <div class='content'>";
+        echo" <div class='content-text'>¡¡La contraseña debe contener al menos 8 caracteres, una letra mayúscula, una letra minúscula, un número y un carácter especial!<a href='crear_usuario.php'> inténtalo nuevamente.! </a>";
+         echo "       </div>";
+         echo "   </div>";
             return false;
         }
 
@@ -78,6 +77,15 @@ class CorreoConfirmacion {
         require 'PHPMailer/PHPMailer/PHPMailer.php';
         require 'PHPMailer/PHPMailer/SMTP.php';
 
+        global $db;
+
+        // Generar un identificador único y aleatorio
+        $identifier = uniqid();
+
+        // Guardar el identificador y el hash en la base de datos
+        $sql_insert = "INSERT INTO hash_identificador (hash,identificador) VALUES ('$hash', '$identifier')";
+        $db->query($sql_insert);
+
         $mail = new PHPMailer\PHPMailer\PHPMailer();
 
         // Configurar el servidor SMTP
@@ -92,8 +100,8 @@ class CorreoConfirmacion {
         // Configurar el correo electrónico
         $mail->setFrom('biometrias@migracioncolombia.gov.co'); // Remitente
         $mail->addAddress($email); // Destinatario
-        $mail->Subject = 'confirmacion de cuenta bioemtrias'; // Asunto
-        $mail->Body = utf8_encode('¡Haz clic en el siguiente enlace para confirmar tu registro: http://localhost/biometrias/confirmar_cuenta.php?hash=' . $hash);  // Cuerpo del correo
+        $mail->Subject = 'confirmacion de cuenta biometrías'; // Asunto
+        $mail->Body = utf8_encode('¡Haz clic en el siguiente enlace para confirmar tu registro: http://localhost/biometrias/confirmar_cuenta.php?identificador=' . $identifier);  // Cuerpo del correo
 
         // Enviar correo electrónico
         if ($mail->send()) {
@@ -113,27 +121,21 @@ if ($registro) {
     $correoConfirmacion = new CorreoConfirmacion();
     if ($correoConfirmacion->enviarCorreoConfirmacion($registro['email'], $registro['hash'])) {
         // Redirigir al usuario a la página de autenticación después de enviar el correo de confirmación
-        echo" <div class='window-notice' id='window-notice'>";
-        echo"  <div class='content'>";
-        echo" <div class='content-text'>Usuario registrado correctamente<a href='index.php'>Iniciar sesion.</a> ";
-        echo" </div>";
-        echo"  </div>";
+        header("Location: autenticacion.php");
         exit;
     } else {
-
-        echo" <div class='window-notice' id='window-notice'>";
-        echo"  <div class='content'>";
-        echo" <div class='content-text'>Error al enviar correo de confirmación<a href='crear_usuario.php'>Volver a intentar.</a> ";
-        echo" </div>";
-        echo"  </div>";
+        echo "   <div class='window-notice' id='window-notice'>";
+        echo "    <div class='content'>";
+        echo" <div class='content-text'>¡Error al enviar el correo electrónico de confirmación. Por favor,<a href='crear_usuario.php'> inténtalo nuevamente.! </a>";
+         echo "       </div>";
+         echo "   </div>";
     }
 } else {
-    echo" <div class='window-notice' id='window-notice'>";
-    echo"  <div class='content'>";
-    echo" <div class='content-text'>Hubo un error al crear el usuario. Por favor, inténtalo nuevamente. <a href='crear_usuario.php'>Volver a intentar.</a> ";
-    echo" </div>";
-    echo"  </div>";
-
+    echo "   <div class='window-notice' id='window-notice'>";
+    echo "    <div class='content'>";
+    echo "<div class='content-text'>¡Hubo un error al crear el usuario. Por favor, inténtalo nuevamente,<a href='crear_usuario.php'> inténtalo nuevamente.! </a>";
+     echo "       </div>";
+     echo "   </div>";
 }
 ?>
 </body>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-05-2024 a las 18:38:13
+-- Tiempo de generación: 10-05-2024 a las 16:58:30
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 7.4.14
 
@@ -33,6 +33,26 @@ CREATE TABLE `auditorias` (
   `nro_paquetes_descargados` int(50) NOT NULL,
   `observaciones` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `hash_identificador`
+--
+
+CREATE TABLE `hash_identificador` (
+  `id` int(11) NOT NULL,
+  `hash` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `identificador` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `fecha_de_creacion` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `hash_identificador`
+--
+
+INSERT INTO `hash_identificador` (`id`, `hash`, `identificador`, `fecha_de_creacion`) VALUES
+(7, '82cec96096d4281b7c95cd7e74623496', '663d49968af72', '2024-05-09 22:09:26');
 
 -- --------------------------------------------------------
 
@@ -95,20 +115,19 @@ CREATE TABLE `usuarios` (
   `nombres` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `apellidos` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `correo_corp` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `tipo_documento` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `nro_documento` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `password` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `estado_confirmacion` int(11) DEFAULT 0,
-  `hash` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
+  `hash` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id_usuario`, `nombres`, `apellidos`, `correo_corp`, `tipo_documento`, `nro_documento`, `password`, `estado_confirmacion`, `hash`) VALUES
-(19, 'cris', 'ro', 'cristian.ars2@hotmail.com', '', '1013640571', '$2y$10$EgncNACWof6Re8HhUxrF1eXSN718wIY4EtM2qebEgqr3VPBIMhRnS', 1, 'db8e1af0cb3aca1ae2d0018624204529'),
-(20, 'cris', 'robleo', 'cristian.ars@hotmail.com', '', '1013640572', '$2y$10$ibkJyz1ofx4qOnG/fOdC6OlNjw6NNqvV8V4ipw5ofRsXuyhirCUta', 1, '9ad6aaed513b73148b7d49f70afcfb32');
+INSERT INTO `usuarios` (`id_usuario`, `nombres`, `apellidos`, `correo_corp`, `nro_documento`, `password`, `estado_confirmacion`, `hash`, `fecha_creacion`) VALUES
+(35, 'cris', 'Robledo', 'cristian.ars@hotmail.com', '1013640571', '$2y$10$6DvJH8Q7hCp2phSTdiBk.u4YPIW6YglVGrMTokliHAHesmPvvpDU6', 0, '82cec96096d4281b7c95cd7e74623496', '2024-05-09 22:09:26');
 
 --
 -- Índices para tablas volcadas
@@ -119,6 +138,12 @@ INSERT INTO `usuarios` (`id_usuario`, `nombres`, `apellidos`, `correo_corp`, `ti
 --
 ALTER TABLE `auditorias`
   ADD PRIMARY KEY (`id_auditoria`);
+
+--
+-- Indices de la tabla `hash_identificador`
+--
+ALTER TABLE `hash_identificador`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `he_descargados`
@@ -161,6 +186,12 @@ ALTER TABLE `auditorias`
   MODIFY `id_auditoria` int(50) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `hash_identificador`
+--
+ALTER TABLE `hash_identificador`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT de la tabla `he_descargados`
 --
 ALTER TABLE `he_descargados`
@@ -188,7 +219,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_usuario` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

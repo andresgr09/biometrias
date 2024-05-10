@@ -1,11 +1,17 @@
+
+
 <?php
     header('Content-Type: text/html; charset=UTF-8');
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="stylesheet" href="ventana_emergente.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="migracion_temp\images\favicon.png" />
+    <link rel="stylesheet" href="ventana_emergente.css">
+    <title>Recuperar contraseña</title>
    <style>
     p{
         color:solid black;
@@ -85,8 +91,12 @@ class RecuperacionContrasena {
             }
         } else {
             // El correo no existe en la base de datos, muestra un mensaje de error.
-            echo'<script>alert("El correo electrónico no está registrado"); window.location = "recuperar_contraseña.php";</script>';
-        }
+                    echo "   <div class='window-notice' id='window-notice'>";
+            echo "    <div class='content'>";
+            echo "<div class='content-text'>¡El correo electrónico no está registrado<a href='recuperar_contraseña.php'> inténtalo nuevamente.! </a>";
+            echo "       </div>";
+            echo "   </div>";
+                }
     }
 
     public function __destruct() {

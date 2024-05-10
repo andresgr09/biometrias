@@ -1,18 +1,17 @@
-<?php
-session_start();
-// require_once("seguridad.php");
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="icon" type="image/png" href="migracion_temp\images\favicon.png" />
     <link rel="stylesheet" href="ventana_emergente.css">
+    <title>Evaluar usuario</title>
 </head>
 <body>
-    
-
+<?php
+session_start();
+// require_once("seguridad.php");
+?>
 <?php
 class Usuario {
     public function evaluar($documento, $password) {
@@ -20,7 +19,7 @@ class Usuario {
         $cont = 0;
         
         include("conexion.php");
-        $sql = "SELECT * FROM usuarios WHERE nro_documento='$documento' AND estado_confirmacion = 1";
+        $sql = "SELECT * FROM usuarios WHERE nro_documento='$documento'";
         
         if (!$result = $db->query($sql)) {
             die('Hay un error corriendo en la consulta o datos no encontrados!!! [' . $db->error . ']');
@@ -32,17 +31,28 @@ class Usuario {
             $cont++;
             $_SESSION["documento"] = $documento;
             $_SESSION["nombre_usuario"] = $nnombres; // Guarda el nombre del usuario en una variable de sesión
+            
+            // Verificar si el estado de confirmación es 0
+            if ($row['estado_confirmacion'] == 0) {
+                // Mostrar mensaje indicando que la cuenta no está confirmada
+            echo "   <div class='window-notice' id='window-notice'>";
+    echo "    <div class='content'>";
+    echo "<div class='content-text'>¡Alerta! <br>. Por favor, confirme su cuenta en el correo electrónico.'> <a href='index.php'>inténtalo nuevamente.! </a>";
+     echo "       </div>";
+     echo "   </div>";
+                return; // Terminar la ejecución del método
+            }
         }
         
         if ($cont != 0 && password_verify($password, $hashAlmacenada )) {
             echo "<h2>Bienvenido(a)  $nnombres </h2>";
             header("location:autenticacion_exitosa.php");
         } else {
-            echo" <div class='window-notice' id='window-notice'>";
-    echo"  <div class='content'>";
-    echo"      <div class='content-text'>Datos incorrectos <a href='index.php'>Volver a intentar. ";
-    echo" </div>";
-    echo"  </div>";
+            echo "   <div class='window-notice' id='window-notice'>";
+    echo "    <div class='content'>";
+    echo "<div class='content-text'>¡Datos incorrectos <a href='index.php'> inténtalo nuevamente.! </a>";
+     echo "       </div>";
+     echo "   </div>";
         }
     }
 }

@@ -25,3 +25,9 @@
     padding: 2rem;
     font-size: 1.3rem;
 }
+a{
+    text-decoration: none;
+}
+a:hover{
+    color: green;
+}
