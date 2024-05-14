@@ -11,7 +11,8 @@ require_once("seguridad.php");
     <title>Document</title>
 </head>
 <body>
-    <?php include("menu\menu.php")
+    <?php include("menu\menu.php");
+    include ("conexion_oracle.php");
 
 ?>    
     
