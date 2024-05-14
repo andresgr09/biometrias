@@ -9,10 +9,11 @@ require_once("seguridad.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="botones.css">
-    <title>Document</title>
+    <link rel="icon" type="image/png" href="../migracion_temp/images/favicon.png" />
+    <title>Funciones</title>
 </head>
 <body>
-    <?php include("menu\menu.php");
+    <?php include("../menu/menu.php");
     include ("conexion_oracle.php");
 ?>
     <?php
@@ -25,13 +26,15 @@ require_once("seguridad.php");
 ?>
 <h1 style=text-align:center;> Bienvenido(a) <?php echo $nombreUsuario ?></h1>
 <div class="button">
-    <p> <a href="funciones_admin.php" class="btn btn-link" role="button"> Mis funciones</a> </p>
+    <p> <a href="..\front_end\mis_funciones.php" class="btn btn-link" role="button"> Mis funciones</a> </p>
     <p> <a href="actualizar_contraseña.php" class="btn btn-link" role="button">Actualizar contraseña</a> </p>
     <p> <a href="actualizar_datos.php" class="btn btn-link" role="button">Actualizar mis datos</a> </p>
 </div>
 
 
-
+<?php
+include("../menu/footer.php")
+?>
     
 </body>
 </html>

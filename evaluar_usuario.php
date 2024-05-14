@@ -45,7 +45,7 @@ class Usuario {
         }
         
         if ($cont != 0 && password_verify($password, $hashAlmacenada )) {
-            header("location:autenticacion_exitosa.php");
+            header("location:front_end\autenticacion_exitosa.php");
         } else {
             echo "   <div class='window-notice' id='window-notice'>";
     echo "    <div class='content'>";

@@ -8,10 +8,9 @@
     <title>Creacion usuario</title>
 </head>
 <body>
-    
-
 <?php
 include("conexion.php");
+include("validaciones.php"); // Incluir el archivo con las funciones de validación
 
 class Usuario {
     public function crear($nombres, $apellidos, $documento, $email, $password) {
@@ -22,13 +21,7 @@ class Usuario {
         $result = $db->query($sql);
 
         if ($result->num_rows > 0) {
-
-            echo "   <div class='window-notice' id='window-notice'>";
-        echo "    <div class='content'>";
-        echo" <div class='content-text'>¡La cédula ya está registrada con otro usuario!<a href='crear_usuario.php'> inténtalo nuevamente.! </a>";
-         echo "       </div>";
-         echo "   </div>";
-            return false;
+            return "La cédula ya está registrada con otro usuario.";
         }
 
         // Validar si ya existe un usuario con el mismo correo
@@ -36,23 +29,38 @@ class Usuario {
         $result = $db->query($sql);
 
         if ($result->num_rows > 0) {
-            echo "   <div class='window-notice' id='window-notice'>";
-        echo "    <div class='content'>";
-        echo" <div class='content-text'>¡El correo ya está registrado con otro usuario!<a href='crear_usuario.php'> inténtalo nuevamente.! </a>";
-         echo "       </div>";
-         echo "   </div>";
-            return false;
+            return "El correo ya está registrado con otro usuario.";
         }
 
         // Verificar requisitos de contraseña
         if (strlen($password) < 8 || !preg_match("/[a-z]/", $password) || !preg_match("/[A-Z]/", $password) || !preg_match("/[0-9]/", $password) || !preg_match("/[!@#$%^&*()\-_=+{};:,<.>]/", $password)) {
-        echo "   <div class='window-notice' id='window-notice'>";
-        echo "    <div class='content'>";
-        echo" <div class='content-text'>¡¡La contraseña debe contener al menos 8 caracteres, una letra mayúscula, una letra minúscula, un número y un carácter especial!<a href='crear_usuario.php'> inténtalo nuevamente.! </a>";
-         echo "       </div>";
-         echo "   </div>";
-            return false;
+            return "La contraseña debe contener al menos 8 caracteres, una letra mayúscula, una letra minúscula, un número y un carácter especial.";
         }
+    
+        // Validar el campo de nombres
+        if (!validarNombres($nombres)) {
+            echo "<script>alert('Los nombres contienen caracteres no permitidos'); window.location.href = 'crear_usuario.php';</script>";
+            exit; // Detener la ejecución del script
+        }
+
+        // Validar el campo de apellidos
+        if (!validarApellidos($apellidos)) {
+            echo "<script>alert('Los apellidos contienen caracteres no permitidos'); window.location.href = 'crear_usuario.php';</script>";
+            exit; // Detener la ejecución del script
+            
+        }
+             
+        if (!validarEmail($email)) {
+         echo "<script>alert('El correo electrónico debe tener el dominio @migracioncolombia.gov.co'); window.location.href = 'crear_usuario.php';</script>";
+         exit; // Detener la ejecución del script
+        }}
+
+        if (!validarDocumento($documento)) {
+            echo "<script>alert('El numero de documento no puede contener letras o caracteres especiales'); window.location.href = 'crear_usuario.php';</script>";
+            exit; // Detener la ejecución del script
+           }
+   
+
 
         // Hash de la contraseña
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
@@ -66,7 +74,7 @@ class Usuario {
         if ($db->query($sql)) {
             return array('email' => $email, 'hash' => $hash); // Retornar el correo electrónico y el hash del usuario registrado
         } else {
-            die('Hubo un error al registrar el usuario: ' . $db->error);
+            return "Hubo un error al registrar el usuario: " . $db->error;
         }
     }
 }
@@ -113,14 +121,16 @@ class CorreoConfirmacion {
     }
 }
 
-// Ejemplo de uso
-$usuario = new Usuario();
-$registro = $usuario->crear($_POST["nombres"], $_POST["apellidos"], $_POST["documento"], $_POST["email"], $_POST["password"]);
+// Verificar si el formulario ha sido enviado
 
-if ($registro) {
-    $correoConfirmacion = new CorreoConfirmacion();
-    if ($correoConfirmacion->enviarCorreoConfirmacion($registro['email'], $registro['hash'])) {
-        // Redirigir al usuario a la página de autenticación después de enviar el correo de confirmación
+    // Ejemplo de uso
+    $usuario = new Usuario();
+    $registro = $usuario->crear($_POST["nombres"], $_POST["apellidos"], $_POST["documento"], $_POST["email"], $_POST["password"]);
+
+    if (is_array($registro)) {
+        $correoConfirmacion = new CorreoConfirmacion();
+        if ($correoConfirmacion->enviarCorreoConfirmacion($registro['email'], $registro['hash'])) {
+       // Redirigir al usuario a la página de autenticación después de enviar el correo de confirmación
         // header("Location: autenticacion.php");
         echo "   <div class='window-notice' id='window-notice'>";
         echo "    <div class='content'>";
