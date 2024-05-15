@@ -1,7 +1,7 @@
 
 <?php
 // session_start();
-require_once("../seguridad.php");
+ require_once("seguridad.php"); 
 // ?>
 
 
@@ -12,6 +12,7 @@ require_once("../seguridad.php");
 
   <title>Funciones</title>
   <link rel="icon" type="image/x-icon" href="images/logo_head.png" />
+  <link rel="icon" type="image/png" href="../migracion_temp/images/favicon.png" />
 
   <link rel="stylesheet" href="../front_end/botones.css">
 
@@ -50,7 +51,7 @@ require_once("../seguridad.php");
  <div class="button">
   <p> <a href="../front_end/descarga_biometrias.php" class="btn btn-link" id="personasbtn" role="button"> Descarga de Biometrías</a> </p>
           
-  <p> <a href="/proyecto_oracle/actualizar_replicas/replicas_mysql.php" class="btn btn-link" id="replicas-btn" role="button"> Informe bíometrias descargadas</a> </p>
+  <p> <a href="../front_end/reporte_biometrias.php" class="btn btn-link" id="replicas-btn" role="button"> Informe bíometrias descargadas</a> </p>
 
 
 
@@ -63,7 +64,7 @@ require_once("../seguridad.php");
     
     
               
- <center><a class="btn btn-primary" href="..\front_end\autenticacion_exitosa.php" role="button">atras</a></center>
+ <center><a class="btn btn-primary" id="atras" href="..\front_end\autenticacion_exitosa.php" role="button">Atras</a></center>
 </body>
 </footer></footer>
 

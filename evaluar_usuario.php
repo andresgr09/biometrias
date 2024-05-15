@@ -7,12 +7,14 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="migracion_temp\images\favicon.png" />
-    <link rel="stylesheet" href="ventana_emergente.css">
+    <link rel="stylesheet" href="estilos_login\ventana_emergente.css">
     <title>Evaluar usuario</title>
 </head>
 <body>
 
 <?php
+include ("validaciones.php");
+
 class Usuario {
     public function evaluar($documento, $password) {
         $nnombres = "sin registro";
@@ -20,6 +22,28 @@ class Usuario {
         
         include("conexion.php");
         $sql = "SELECT * FROM usuarios WHERE nro_documento='$documento'";
+
+        if (!validarDocumento($documento)) {
+            echo "   <div class='window-notice' id='window-notice'>";
+            echo "    <div class='content'>";
+            echo" <div class='content-text'>El numero de documento no puede contener letras o caracteres especiales<br><a href='index.php'> inténtalo nuevamente.!</a>";
+            echo "       </div>";
+            echo "   </div>";
+            exit;
+           }
+
+           $password = $_POST['password'];
+
+           // Ahora puedes usar la función validarContraseña()
+           if (!validarContraseña($password)) {
+               echo "<div class='window-notice' id='window-notice'>";
+               echo "<div class='content'>";
+               echo "<div class='content-text'>La contraseña debe cumplir con los estándares de seguridad requeridos.<br>Asegúrate de que tu contraseña tenga al menos 8 caracteres y contenga una combinación de letras mayúsculas, minúsculas, al menos 1 número y 1 caracter especial.<br><a href='index.php'> inténtalo nuevamente.!</a>";
+               echo "</div>";
+               echo "</div>";
+               exit;
+           }
+   
         
         if (!$result = $db->query($sql)) {
             die('Hay un error corriendo en la consulta o datos no encontrados!!! [' . $db->error . ']');

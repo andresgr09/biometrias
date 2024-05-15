@@ -10,7 +10,7 @@
 <?php
  echo " <div class='content'>";
   echo "</div>";
-  echo"<br>.<br>.<br>.<br>.<br>.<br>.<br>";
+  echo"<br><br><br><br><br><br><br>";
 
  echo " <footer class='footer'>";
  

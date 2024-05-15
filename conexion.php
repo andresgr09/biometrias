@@ -8,5 +8,6 @@ if($db->connect_error > 0)
     die('No se puede conectar [' . $db->connect_error . ']');
 	
 }
+
 ?>
 

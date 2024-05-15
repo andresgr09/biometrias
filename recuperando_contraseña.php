@@ -5,11 +5,10 @@ header('Content-Type: text/html; charset=UTF-8');
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="ventana_emergente.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="migracion_temp\images\favicon.png" />
-    <link rel="stylesheet" href="ventana_emergente.css">
+    <link rel="stylesheet" href="estilos_login\ventana_emergente.css">
     <title>Recuperar contraseña</title>
     <style>
         p {
@@ -97,14 +96,14 @@ header('Content-Type: text/html; charset=UTF-8');
                     // La cuenta no está confirmada
                     echo "<div class='window-notice' id='window-notice'>";
                     echo "<div class='content'>";
-                    echo "<div class='content-text'>¡La cuenta asociada a este correo electrónico aún no ha sido confirmada por correo! Por favor, revisa tu bandeja de entrada y confirma tu cuenta.<a href='index.php'>Volver a intentar</a></div>";
+                    echo "<div class='content-text'>¡La cuenta asociada a este correo electrónico aún no ha sido confirmada por correo! Por favor, revisa tu bandeja de entrada y confirma tu cuenta. <br><a href='index.php'>Volver a intentar</a></div>";
                     echo "</div>";
                 }
             } else {
                 // El correo electrónico no está registrado
                 echo "<div class='window-notice' id='window-notice'>";
                 echo "<div class='content'>";
-                echo "<div class='content-text'>¡El correo electrónico no está registrado en nuestra base de datos! Por favor, verifica si has escrito correctamente tu correo o regístrate si aún no lo has hecho. <a href='index.php'>Volver a intentar</a></div>";
+                echo "<div class='content-text'>¡El correo electrónico no está registrado en nuestra base de datos! Por favor, verifica si has escrito correctamente tu correo o regístrate si aún no lo has hecho. <br><a href='index.php'>Volver a intentar</a></div>";
                 echo "</div>";
             }
         }

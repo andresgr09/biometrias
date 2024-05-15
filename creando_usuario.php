@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="migracion_temp\images\favicon.png" />
-    <link rel="stylesheet" href="ventana_emergente.css">
+    <link rel="stylesheet" href="estilos_login\ventana_emergente.css">
     <title>Creacion usuario</title>
 </head>
 <body>
@@ -33,31 +33,51 @@ class Usuario {
         }
 
         // Verificar requisitos de contraseña
-        if (strlen($password) < 8 || !preg_match("/[a-z]/", $password) || !preg_match("/[A-Z]/", $password) || !preg_match("/[0-9]/", $password) || !preg_match("/[!@#$%^&*()\-_=+{};:,<.>]/", $password)) {
-            return "La contraseña debe contener al menos 8 caracteres, una letra mayúscula, una letra minúscula, un número y un carácter especial.";
+        if (!validarContraseña($password)) {
+            echo "<div class='window-notice' id='window-notice'>";
+            echo "<div class='content'>";
+            echo "<div class='content-text'>La contraseña debe cumplir con los estándares de seguridad requeridos.<br>Asegúrate de que tu contraseña tenga al menos 8 caracteres y contenga una combinación de letras mayúsculas, minúsculas, al menos 1 número y 1 caracter especial.<br><a href='index.php'> inténtalo nuevamente.!</a>";
+            echo "</div>";
+            echo "</div>";
+            exit;
         }
-    
         // Validar el campo de nombres
         if (!validarNombres($nombres)) {
-            echo "<script>alert('Los nombres contienen caracteres no permitidos'); window.location.href = 'crear_usuario.php';</script>";
-            exit; // Detener la ejecución del script
+            echo "   <div class='window-notice' id='window-notice'>";
+            echo "    <div class='content'>";
+            echo" <div class='content-text'>Los nombres contienen caracteres no permitidos <br><a href='crear_usuario.php'> inténtalo nuevamente.!</a>";
+             echo "       </div>";
+             echo "   </div>";
+            exit;
         }
 
         // Validar el campo de apellidos
         if (!validarApellidos($apellidos)) {
-            echo "<script>alert('Los apellidos contienen caracteres no permitidos'); window.location.href = 'crear_usuario.php';</script>";
-            exit; // Detener la ejecución del script
+            echo "   <div class='window-notice' id='window-notice'>";
+            echo "    <div class='content'>";
+            echo" <div class='content-text'>Los apellidos contienen caracteres no permitidos <br><a href='crear_usuario.php'> inténtalo nuevamente.!</a>";
+             echo "       </div>";
+             echo "   </div>";
+             exit ;
             
         }
              
         if (!validarEmail($email)) {
-         echo "<script>alert('El correo electrónico debe tener el dominio @migracioncolombia.gov.co'); window.location.href = 'crear_usuario.php';</script>";
-         exit; // Detener la ejecución del script
-        }}
+            echo "   <div class='window-notice' id='window-notice'>";
+            echo "    <div class='content'>";
+            echo" <div class='content-text'>El correo electrónico debe tener el dominio @migracioncolombia.gov.co <br><a href='crear_usuario.php'> inténtalo nuevamente.!</a>";
+            echo "       </div>";
+            echo "   </div>";
+            exit ;
+        }
 
         if (!validarDocumento($documento)) {
-            echo "<script>alert('El numero de documento no puede contener letras o caracteres especiales'); window.location.href = 'crear_usuario.php';</script>";
-            exit; // Detener la ejecución del script
+            echo "   <div class='window-notice' id='window-notice'>";
+            echo "    <div class='content'>";
+            echo" <div class='content-text'>El numero de documento no puede contener letras o caracteres especiales<br><a href='crear_usuario.php'> inténtalo nuevamente.!</a>";
+            echo "       </div>";
+            echo "   </div>";
+            exit;
            }
    
 

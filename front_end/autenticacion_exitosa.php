@@ -28,7 +28,7 @@ require_once("seguridad.php");
 <div class="button">
     <p> <a href="..\front_end\mis_funciones.php" class="btn btn-link" role="button"> Mis funciones</a> </p>
     <p> <a href="actualizar_contraseña.php" class="btn btn-link" role="button">Actualizar contraseña</a> </p>
-    <p> <a href="actualizar_datos.php" class="btn btn-link" role="button">Actualizar mis datos</a> </p>
+    <p> <a href="actualizar_datos.php"  id="actu" class="btn btn-link" role="button">Actualizar mis datos</a> </p>
 </div>
 
 

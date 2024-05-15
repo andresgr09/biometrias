@@ -7,7 +7,7 @@ session_start(); // Iniciar o reanudar la sesión
 
 if (!isset($_SESSION['documento']) || empty($_SESSION['documento'])) {
     // Si no hay sesión activa, redirigir al usuario a la página de inicio de sesión
-    header("location: index.php"); // Cambia esto según tu estructura de URLs
+    header("location:/biometrias/index.php"); // Cambia esto según tu estructura de URLs
     exit();
 }
 ?>

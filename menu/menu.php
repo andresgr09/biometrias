@@ -16,7 +16,7 @@ if(isset($_SESSION['nombre_usuario']) && !empty($_SESSION['nombre_usuario'])) {
   echo "        <p>¿Que desea hacer hoy?, $nombreUsuario</p>";
   } 
   echo "    </div>";
-  echo "<a href='salir.php' class='logout' >Cerrar Sesión </a>";
+  echo "<a href='../salir.php' class='logout' >Cerrar Sesión </a>";
   echo " </nav>";
 
 
