@@ -7,7 +7,7 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="migracion_temp\images\favicon.png" />
-    <link rel="stylesheet" href="estilos_login\ventana_emergente.css">
+    <link rel="stylesheet" href="ventana_emergente.css">
     <title>Evaluar usuario</title>
 </head>
 <body>
@@ -34,20 +34,31 @@ class Usuario {
 
            $password = $_POST['password'];
 
-           // Ahora puedes usar la función validarContraseña()
            if (!validarContraseña($password)) {
-               echo "<div class='window-notice' id='window-notice'>";
-               echo "<div class='content'>";
-               echo "<div class='content-text'>La contraseña debe cumplir con los estándares de seguridad requeridos.<br>Asegúrate de que tu contraseña tenga al menos 8 caracteres y contenga una combinación de letras mayúsculas, minúsculas, al menos 1 número y 1 caracter especial.<br><a href='index.php'> inténtalo nuevamente.!</a>";
-               echo "</div>";
-               echo "</div>";
-               exit;
+            echo "<div class='window-notice' id='window-notice'>";
+            echo "<div class='content'>";
+            echo "<div class='content-text'>Si la contraseña fue registrada con un usuario debe tener  encuenta que esta debe tener minimo 8 caracteres y una combinación de letras mayúsculas, minúsculas, al menos 1 número y 1 caracter especial.!</a>";
+            echo "</div>";
+            echo "</div>";  
+            exit;
            }
-   
         
-        if (!$result = $db->query($sql)) {
+
+           // Ahora puedes usar la función validarContraseña()
+       
+           if (!$result = $db->query($sql)) {
             die('Hay un error corriendo en la consulta o datos no encontrados!!! [' . $db->error . ']');
-        }
+           }
+        /*} else {
+            if (!validarContraseña($password)) {
+                echo "<div class='window-notice' id='window-notice'>";
+                echo "<div class='content'>";
+                echo "<div class='content-text'>Si la contraseña fue registrada con un usuario debe tener  encuenta que esta debe tener minimo 8 caracteres y una combinación de letras mayúsculas, minúsculas, al menos 1 número y 1 caracter especial.!</a>";
+                echo "</div>";
+                echo "</div>";  
+                exit;
+            }
+        }*/
         
         while ($row = $result->fetch_assoc()) {
             $hashAlmacenada = $row["password"];

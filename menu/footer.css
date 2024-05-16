@@ -4,10 +4,10 @@
     font-size: 0.875em;
 } */
 
-body {
+/* body {
     margin: 0;
     padding: 0;
-  }
+  } */
   
   .content {
     padding: 20px;
@@ -22,4 +22,26 @@ body {
   p{
     color: white;
   }
-  
+
+  /* footer {
+    position: fixed; 
+    bottom: 0;
+    width: 100%;
+} */
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+footer {
+  margin-top: auto;
+}
+.texto{
+  padding: 5px 0;
+}

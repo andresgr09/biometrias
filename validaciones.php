@@ -29,16 +29,22 @@ function validarDocumento($documento) {
     return preg_match($patron, $documento);
 }
 function validarContraseña($password) {
-    // Definir el patrón de expresión regular
-    $patron = "/[a-z]/";
-    $patron .= "/[A-Z]/";
-    $patron .= "/[0-9]/";
-    $patron .= "/[!@#$%^&*()\\-_+=}{;:,<.>]/"; // Escapar los caracteres especiales
+    // Definir los patrones de expresión regular
+    $patronMinusculas = "/[a-z]/";
+    $patronMayusculas = "/[A-Z]/";
+    $patronNumeros = "/[0-9]/";
+    $patronCaracteresEspeciales = "/[!@#$%^&*()\\-_+=}{;:,<.>]/"; // Escapar los caracteres especiales
 
-    // Utilizar la función preg_match() para verificar si la contraseña coincide con el patrón
-    return preg_match($patron, $password);
+    // Utilizar la función preg_match() para verificar si la contraseña coincide con los patrones
+    // y asignar el resultado a una variable
+    $cumpleMinusculas = preg_match($patronMinusculas, $password);
+    $cumpleMayusculas = preg_match($patronMayusculas, $password);
+    $cumpleNumeros = preg_match($patronNumeros, $password);
+    $cumpleCaracteresEspeciales = preg_match($patronCaracteresEspeciales, $password);
+
+    // Retornar true solo si todos los patrones son satisfechos
+    return $cumpleMinusculas && $cumpleMayusculas && $cumpleNumeros && $cumpleCaracteresEspeciales;
 }
-
 ?>
 
 

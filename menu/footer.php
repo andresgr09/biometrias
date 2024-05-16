@@ -10,12 +10,12 @@
 <?php
  echo " <div class='content'>";
   echo "</div>";
-  echo"<br><br><br><br><br><br><br>";
+  // echo"<br><br><br><br><br><br><br>";
 
  echo " <footer class='footer'>";
  
  
-       echo "<p>Proyecto desarrollado por Cristian Robledo y Andrés Granados | Desarrolladores Técnicos</p>"; 
+       echo "<p class='texto'>Proyecto desarrollado por Cristian Robledo y Andrés Granados | Desarrolladores Técnicos</p>"; 
        echo "<p>© 2024 Todos los derechos reservados.</p>";
       
   echo "</footer>";

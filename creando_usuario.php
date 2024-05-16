@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="migracion_temp\images\favicon.png" />
-    <link rel="stylesheet" href="estilos_login\ventana_emergente.css">
+    <link rel="stylesheet" href="ventana_emergente.css">
     <title>Creacion usuario</title>
 </head>
 <body>
