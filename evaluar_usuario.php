@@ -7,7 +7,7 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="migracion_temp\images\favicon.png" />
-    <link rel="stylesheet" href="ventana_emergente.css">
+    <link rel="stylesheet" href="estilos_login\ventana_emergente.css">
     <title>Evaluar usuario</title>
 </head>
 <body>
@@ -37,7 +37,7 @@ class Usuario {
            if (!validarContraseña($password)) {
             echo "<div class='window-notice' id='window-notice'>";
             echo "<div class='content'>";
-            echo "<div class='content-text'>Si la contraseña fue registrada con un usuario debe tener  encuenta que esta debe tener minimo 8 caracteres y una combinación de letras mayúsculas, minúsculas, al menos 1 número y 1 caracter especial.!</a>";
+            echo "<div class='content-text'>Si la contraseña fue registrada con un usuario debe tener  encuenta que esta debe tener minimo 8 caracteres y una combinación de letras mayúsculas, minúsculas, al menos 1 número y 1 caracter especial.!<br><a href='index.php'>Volver a intentar</a>";
             echo "</div>";
             echo "</div>";  
             exit;
