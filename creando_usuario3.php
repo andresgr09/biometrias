@@ -10,7 +10,7 @@
 <body>
 <?php
 include("conexion.php");
-REQUIRE("validaciones.php"); // Incluir el archivo con las funciones de validación
+include("validaciones.php"); // Incluir el archivo con las funciones de validación
 
 class Usuario {
     public function crear($nombres, $apellidos, $documento, $email, $password) {
@@ -32,7 +32,15 @@ class Usuario {
             return "El correo ya está registrado con otro usuario.";
         }
 
-       
+        // Verificar requisitos de contraseña
+        if (!validarContraseña($password)) {
+            echo "<div class='window-notice' id='window-notice'>";
+            echo "<div class='content'>";
+            echo "<div class='content-text'>La contraseña debe cumplir con los estándares de seguridad requeridos.<br>Asegúrate de que tu contraseña tenga al menos 8 caracteres y contenga una combinación de letras mayúsculas, minúsculas, al menos 1 número y 1 caracter especial.<br><a href='index.php'> inténtalo nuevamente.!</a>";
+            echo "</div>";
+            echo "</div>";
+            exit;
+        }
         // Validar el campo de nombres
         if (!validarNombres($nombres)) {
             echo "   <div class='window-notice' id='window-notice'>";
@@ -71,15 +79,6 @@ class Usuario {
             echo "   </div>";
             exit;
            }
-            // Verificar requisitos de contraseña
-        if (!validarContraseña($password)) {
-            echo "<div class='window-notice' id='window-notice'>";
-            echo "<div class='content'>";
-            echo "<div class='content-text'>La contraseña debe cumplir con los estándares de seguridad requeridos.<br>Asegúrate de que tu contraseña tenga al menos 8 caracteres y contenga una combinación de letras mayúsculas, minúsculas, al menos 1 número y 1 caracter especial.<br><a href='index.php'> inténtalo nuevamente.!</a>";
-            echo "</div>";
-            echo "</div>";
-            exit;
-        }
    
 
 
@@ -89,38 +88,19 @@ class Usuario {
         // Generar un hash único para confirmación de cuenta
         $hash = md5(rand(0,1000));
 
-        $db->begin_transaction();
-
         // Insertar el nuevo usuario en la base de datos con estado de confirmación no confirmado (0)
-        try {
-            // Consulta para insertar en la tabla usuarios
-            $sql = "INSERT INTO usuarios (nombres, apellidos, nro_documento, correo_corp, password, estado_confirmacion, hash) 
-                    VALUES ('$nombres', '$apellidos', '$documento', '$email', '$hashedPassword', 0, '$hash')";
+        $sql = "INSERT INTO usuarios (nombres, apellidos, nro_documento, correo_corp, password, estado_confirmacion, hash) VALUES ('$nombres', '$apellidos', '$documento', '$email', '$hashedPassword', 0, '$hash')";
 
-            if ($db->query($sql)) {
-                // Consulta para insertar en la tabla permisos
-                $fk_id_rol = 1;
-                $sqlPermisos = "INSERT INTO permisos (id_permiso, nro_documento, rol) 
-                                VALUES (NULL, '$documento', '$fk_id_rol')";
+        if ($db->query($sql)) {
+            return array('email' => $email, 'hash' => $hash); // Retornar el correo electrónico y el hash del usuario registrado
+        } else {
+            return "Hubo un error al registrar el usuario: " . $db->error;
 
-                if ($db->query($sqlPermisos)) {
-                    // Confirmar la transacción
-                    $db->commit();
-                    return array('email' => $email, 'hash' => $hash);
-                } else {
-                    // Si hay un error al insertar en permisos, deshacer la transacción
-                    $db->rollback();
-                    return "Hubo un error al registrar los permisos: " . $db->error;
-                }
-            } else {
-                // Si hay un error al insertar en usuarios, deshacer la transacción
-                $db->rollback();
-                return "Hubo un error al registrar el usuario: " . $db->error;
-            }
-        } catch (Exception $e) {
-            // En caso de cualquier excepción, deshacer la transacción
-            $db->rollback();
-            return "Hubo un error: " . $e->getMessage();
+
+                        $fk_id_rol="1";
+                $sql($db,"INSERT INTO permisos (id_permiso, nro_documento, rol  ) VALUES 
+                (NULL, '$documento','$fk_id_rol')") or die(mysqli_error($db));
+
         }
     }
 }
@@ -154,8 +134,8 @@ class CorreoConfirmacion {
         // Configurar el correo electrónico
         $mail->setFrom('biometrias@migracioncolombia.gov.co'); // Remitente
         $mail->addAddress($email); // Destinatario
-        $mail->Subject = 'confirmacion de cuenta biometrias'; // Asunto
-        $mail->Body = utf8_encode('Haz clic en el siguiente enlace para confirmar tu registro: http://localhost/biometrias/confirmar_cuenta.php?identificador=' . $identifier);  // Cuerpo del correo
+        $mail->Subject = 'confirmacion de cuenta biometrías'; // Asunto
+        $mail->Body = utf8_encode('¡Haz clic en el siguiente enlace para confirmar tu registro: http://localhost/biometrias/confirmar_cuenta.php?identificador=' . $identifier);  // Cuerpo del correo
 
         // Enviar correo electrónico
         if ($mail->send()) {
@@ -170,38 +150,34 @@ class CorreoConfirmacion {
 // Verificar si el formulario ha sido enviado
 
     // Ejemplo de uso
-// Ejemplo de uso
-$usuario = new Usuario();
-$registro = $usuario->crear($_POST["nombres"], $_POST["apellidos"], $_POST["documento"], $_POST["email"], $_POST["password"]);
+    $usuario = new Usuario();
+    $registro = $usuario->crear($_POST["nombres"], $_POST["apellidos"], $_POST["documento"], $_POST["email"], $_POST["password"]);
 
-if (is_array($registro)) {
-    $correoConfirmacion = new CorreoConfirmacion();
-    if ($correoConfirmacion->enviarCorreoConfirmacion($registro['email'], $registro['hash'])) {
-        // Redirigir al usuario a la página de autenticación después de enviar el correo de confirmación
+    if (is_array($registro)) {
+        $correoConfirmacion = new CorreoConfirmacion();
+        if ($correoConfirmacion->enviarCorreoConfirmacion($registro['email'], $registro['hash'])) {
+       // Redirigir al usuario a la página de autenticación después de enviar el correo de confirmación
         // header("Location: autenticacion.php");
         echo "   <div class='window-notice' id='window-notice'>";
         echo "    <div class='content'>";
-        echo" <div class='content-text'>¡Usuario registrado correctamente, confirme su registro en el correo electronico <br><a href='index.php'> Iniciar sesion.! </a>";
-        echo "       </div>";
-        echo "   </div>";
+        echo" <div class='content-text'>¡Usuario registrado correctamente, confirme su registro en el correo electronico <br><a href='crear_usuario.php'> Iniciar sesion.! </a>";
+         echo "       </div>";
+         echo "   </div>";
         exit;
     } else {
         echo "   <div class='window-notice' id='window-notice'>";
         echo "    <div class='content'>";
         echo" <div class='content-text'>¡Error al enviar el correo electrónico de confirmación. Por favor, <br><a href='crear_usuario.php'> inténtalo nuevamente.! </a>";
-        echo "       </div>";
-        echo "   </div>";
+         echo "       </div>";
+         echo "   </div>";
     }
 } else {
-    // Mostrar el mensaje de error
-    echo "<div class='window-notice' id='window-notice'>";
-    echo "<div class='content'>";
-    echo "<div class='content-text'>$registro <br><a href='crear_usuario.php'> inténtalo nuevamente.! </a>";
-    echo "</div>";
-    echo "</div>";
+    echo "   <div class='window-notice' id='window-notice'>";
+    echo "    <div class='content'>";
+    echo "<div class='content-text'>¡Hubo un error al crear el usuario. Por favor, inténtalo nuevamente,<br> <a href='crear_usuario.php'> inténtalo nuevamente.! </a>";
+     echo "       </div>";
+     echo "   </div>";
 }
-
-    
 ?>
 </body>
 </html>

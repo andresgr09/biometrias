@@ -21,9 +21,9 @@ require_once("seguridad.php");
         $nombreUsuario = $_SESSION['nombre_usuario'];
 
         } 
-   
-   
 ?>
+ 
+
 <h1 style=text-align:center;> Bienvenido(a) <?php echo $nombreUsuario ?></h1>
 <div class="button">
     <p> <a href="..\front_end\mis_funciones.php" class="btn btn-link" role="button"> Mis funciones</a> </p>

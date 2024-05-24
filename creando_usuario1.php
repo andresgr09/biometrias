@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="migracion_temp\images\favicon.png" />
-    <link rel="stylesheet" href="estilos_login\ventana_emergente.css">
+    <link rel="icon" type="image/png" href="migracion_temp/images/favicon.png" />
+    <link rel="stylesheet" href="estilos_login/ventana_emergente.css">
     <title>Creacion usuario</title>
 </head>
 <body>
 <?php
 include("conexion.php");
-REQUIRE("validaciones.php"); // Incluir el archivo con las funciones de validación
+include("validaciones.php"); // Incluir el archivo con las funciones de validación
 
 class Usuario {
     public function crear($nombres, $apellidos, $documento, $email, $password) {
@@ -32,46 +32,46 @@ class Usuario {
             return "El correo ya está registrado con otro usuario.";
         }
 
+        // Verificar requisitos de contraseña
        
+
         // Validar el campo de nombres
         if (!validarNombres($nombres)) {
-            echo "   <div class='window-notice' id='window-notice'>";
-            echo "    <div class='content'>";
-            echo" <div class='content-text'>Los nombres contienen caracteres no permitidos <br><a href='crear_usuario.php'> inténtalo nuevamente.!</a>";
-             echo "       </div>";
-             echo "   </div>";
+            echo "<div class='window-notice' id='window-notice'>";
+            echo "<div class='content'>";
+            echo "<div class='content-text'>Los nombres contienen caracteres no permitidos <br><a href='crear_usuario.php'> inténtalo nuevamente.!</a>";
+            echo "</div>";
+            echo "</div>";
             exit;
         }
 
         // Validar el campo de apellidos
         if (!validarApellidos($apellidos)) {
-            echo "   <div class='window-notice' id='window-notice'>";
-            echo "    <div class='content'>";
-            echo" <div class='content-text'>Los apellidos contienen caracteres no permitidos <br><a href='crear_usuario.php'> inténtalo nuevamente.!</a>";
-             echo "       </div>";
-             echo "   </div>";
-             exit ;
-            
+            echo "<div class='window-notice' id='window-notice'>";
+            echo "<div class='content'>";
+            echo "<div class='content-text'>Los apellidos contienen caracteres no permitidos <br><a href='crear_usuario.php'> inténtalo nuevamente.!</a>";
+            echo "</div>";
+            echo "</div>";
+            exit;
         }
-             
+
         if (!validarEmail($email)) {
-            echo "   <div class='window-notice' id='window-notice'>";
-            echo "    <div class='content'>";
-            echo" <div class='content-text'>El correo electrónico debe tener el dominio @migracioncolombia.gov.co <br><a href='crear_usuario.php'> inténtalo nuevamente.!</a>";
-            echo "       </div>";
-            echo "   </div>";
-            exit ;
+            echo "<div class='window-notice' id='window-notice'>";
+            echo "<div class='content'>";
+            echo "<div class='content-text'>El correo electrónico debe tener el dominio @migracioncolombia.gov.co <br><a href='crear_usuario.php'> inténtalo nuevamente.!</a>";
+            echo "</div>";
+            echo "</div>";
+            exit;
         }
 
         if (!validarDocumento($documento)) {
-            echo "   <div class='window-notice' id='window-notice'>";
-            echo "    <div class='content'>";
-            echo" <div class='content-text'>El numero de documento no puede contener letras o caracteres especiales<br><a href='crear_usuario.php'> inténtalo nuevamente.!</a>";
-            echo "       </div>";
-            echo "   </div>";
+            echo "<div class='window-notice' id='window-notice'>";
+            echo "<div class='content'>";
+            echo "<div class='content-text'>El numero de documento no puede contener letras o caracteres especiales<br><a href='crear_usuario.php'> inténtalo nuevamente.!</a>";
+            echo "</div>";
+            echo "</div>";
             exit;
-           }
-            // Verificar requisitos de contraseña
+        }
         if (!validarContraseña($password)) {
             echo "<div class='window-notice' id='window-notice'>";
             echo "<div class='content'>";
@@ -80,18 +80,15 @@ class Usuario {
             echo "</div>";
             exit;
         }
-   
-
-
         // Hash de la contraseña
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
         // Generar un hash único para confirmación de cuenta
-        $hash = md5(rand(0,1000));
+        $hash = md5(rand(0, 1000));
 
+        // Iniciar una transacción
         $db->begin_transaction();
 
-        // Insertar el nuevo usuario en la base de datos con estado de confirmación no confirmado (0)
         try {
             // Consulta para insertar en la tabla usuarios
             $sql = "INSERT INTO usuarios (nombres, apellidos, nro_documento, correo_corp, password, estado_confirmacion, hash) 
@@ -137,7 +134,7 @@ class CorreoConfirmacion {
         $identifier = uniqid();
 
         // Guardar el identificador y el hash en la base de datos
-        $sql_insert = "INSERT INTO hash_identificador (hash,identificador) VALUES ('$hash', '$identifier')";
+        $sql_insert = "INSERT INTO hash_identificador (hash, identificador) VALUES ('$hash', '$identifier')";
         $db->query($sql_insert);
 
         $mail = new PHPMailer\PHPMailer\PHPMailer();
@@ -154,8 +151,8 @@ class CorreoConfirmacion {
         // Configurar el correo electrónico
         $mail->setFrom('biometrias@migracioncolombia.gov.co'); // Remitente
         $mail->addAddress($email); // Destinatario
-        $mail->Subject = 'confirmacion de cuenta biometrias'; // Asunto
-        $mail->Body = utf8_encode('Haz clic en el siguiente enlace para confirmar tu registro: http://localhost/biometrias/confirmar_cuenta.php?identificador=' . $identifier);  // Cuerpo del correo
+        $mail->Subject = 'Confirmación de cuenta biometrías'; // Asunto
+        $mail->Body = utf8_encode('¡Haz clic en el siguiente enlace para confirmar tu registro: http://localhost/biometrias/confirmar_cuenta.php?identificador=' . $identifier);  // Cuerpo del correo
 
         // Enviar correo electrónico
         if ($mail->send()) {
@@ -168,40 +165,35 @@ class CorreoConfirmacion {
 }
 
 // Verificar si el formulario ha sido enviado
-
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Ejemplo de uso
-// Ejemplo de uso
-$usuario = new Usuario();
-$registro = $usuario->crear($_POST["nombres"], $_POST["apellidos"], $_POST["documento"], $_POST["email"], $_POST["password"]);
+    $usuario = new Usuario();
+    $registro = $usuario->crear($_POST["nombres"], $_POST["apellidos"], $_POST["documento"], $_POST["email"], $_POST["password"]);
 
-if (is_array($registro)) {
-    $correoConfirmacion = new CorreoConfirmacion();
-    if ($correoConfirmacion->enviarCorreoConfirmacion($registro['email'], $registro['hash'])) {
-        // Redirigir al usuario a la página de autenticación después de enviar el correo de confirmación
-        // header("Location: autenticacion.php");
-        echo "   <div class='window-notice' id='window-notice'>";
-        echo "    <div class='content'>";
-        echo" <div class='content-text'>¡Usuario registrado correctamente, confirme su registro en el correo electronico <br><a href='index.php'> Iniciar sesion.! </a>";
-        echo "       </div>";
-        echo "   </div>";
-        exit;
+    if (is_array($registro)) {
+        $correoConfirmacion = new CorreoConfirmacion();
+        if ($correoConfirmacion->enviarCorreoConfirmacion($registro['email'], $registro['hash'])) {
+            // Redirigir al usuario a la página de autenticación después de enviar el correo de confirmación
+            echo "<div class='window-notice' id='window-notice'>";
+            echo "<div class='content'>";
+            echo "<div class='content-text'>¡Usuario registrado correctamente, confirme su registro en el correo electrónico!<br><a href='crear_usuario.php'>Iniciar sesión.</a></div>";
+            echo "</div>";
+            echo "</div>";
+        } else {
+            echo "<div class='window-notice' id='window-notice'>";
+            echo "<div class='content'>";
+            echo "<div class='content-text'>¡Error al enviar el correo electrónico de confirmación. Por favor,<br><a href='crear_usuario.php'>inténtalo nuevamente.</a></div>";
+            echo "</div>";
+            echo "</div>";
+        }
     } else {
-        echo "   <div class='window-notice' id='window-notice'>";
-        echo "    <div class='content'>";
-        echo" <div class='content-text'>¡Error al enviar el correo electrónico de confirmación. Por favor, <br><a href='crear_usuario.php'> inténtalo nuevamente.! </a>";
-        echo "       </div>";
-        echo "   </div>";
+        echo "<div class='window-notice' id='window-notice'>";
+        echo "<div class='content'>";
+        echo "<div class='content-text'>¡Hubo un error al crear el usuario. Por favor,<br><a href='crear_usuario.php'>inténtalo nuevamente.</a></div>";
+        echo "</div>";
+        echo "</div>";
     }
-} else {
-    // Mostrar el mensaje de error
-    echo "<div class='window-notice' id='window-notice'>";
-    echo "<div class='content'>";
-    echo "<div class='content-text'>$registro <br><a href='crear_usuario.php'> inténtalo nuevamente.! </a>";
-    echo "</div>";
-    echo "</div>";
 }
-
-    
 ?>
 </body>
 </html>
