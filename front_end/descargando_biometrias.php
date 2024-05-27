@@ -73,7 +73,6 @@ class atedesar {
     }
 }
 
-// Procesar los datos del formulario
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $numeros = $_POST['he'];
 
@@ -87,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $numerosEscapados = implode(',', $numerosArray);
 
     try {
-        // Conexión y operación en la base de datos
+        // Conexión y operación en la base de datos Oracle
         $atedesar = new atedesar($userprueba, $passwordprueba, $hostprueba);
 
         // Ejemplo de ejecución de PL/SQL con DBMS_OUTPUT
@@ -98,19 +97,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     migracion.PR_EXP_IMAGEN_OFICINA(:numeros);
                 END;
             ";
-
             $mensajes = $atedesar->executePLSQL($plsql, $numerosEscapados);
         } catch (Exception $e) {
             echo '<p style="color:red;">Error al ejecutar el PL/SQL: ' . $e->getMessage() . '</p>';
         }
 
-        $atedesar->closeConnection();
+        // // Aquí va tu código para la conexión a la base de datos MySQL
+        // $mysqli = new mysqli("localhost", "root", "", "biometrias");
+
+        // // Verificar la conexión
+        // if ($mysqli->connect_error) {
+        //     die("Error en la conexión MySQL: " . $mysqli->connect_error);
+        // }
+
+        // // Insertar los mensajes en la base de datos MySQL
+        // foreach ($mensajes as $mensaje) {
+        //     $sql = "INSERT INTO he_descargados (id_he, he_descargado, tipo_mensaje, nombre_responsable, nro_paquete, fecha) VALUES (NULL,'$mensaje','1','andres','4234','45/45/2425')";
+        //     if ($mysqli->query($sql) !== TRUE) {
+        //         echo "Error al insertar en MySQL: " . $mysqli->error;
+        //     }
+        // }
+
+        // $mysqli->close();
+        // $atedesar->closeConnection();
     } catch (Exception $e) {
         echo '<p style="color:red;">Excepción capturada: ' . $e->getMessage() . '</p>';
     }
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="es">
@@ -126,6 +140,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             text-align: center;
             margin-top: 20px;
         }
+        table{
+            border:2px;
+        }
     </style>
 </head>
 <body>
@@ -136,7 +153,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <!-- Aquí se mostrarán los resultados de la consulta -->
             <?php
             if (isset($mensajes)) {
-                echo "<div class='resultados'>$mensajes</div>";
+                echo "<table style='border-collapse: collapse; width: auto; margin: 0 auto;'>";
+                echo "<tr>" ;
+                 echo "<th style='border :1px solid black'> he </th>";
+                 echo "</tr>";
+                  echo "<td>";
+                 
+                echo " <td style='border :1px solid black'> $mensajes </td>";
+      
+                echo "</table>";
             }
             ?>
         </div>

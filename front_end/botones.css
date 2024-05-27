@@ -56,3 +56,11 @@ h1{
 #atras{
   margin-top: 150px;
 }
+
+#botondescarga{
+  cursor: pointer;
+}
+
+#botondescarga:hover{
+  background-color: #061f8b;
+}

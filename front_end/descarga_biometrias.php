@@ -17,12 +17,12 @@
       <br>
       <h1 style='text-align:center'>Descarga Bíometria(s)</h1>
 
-      <form action="descargando_biometrias.php" method="POST">
+      <form action="descargando_biometrias1.php" method="POST">
     <h3>Ingrese nro(s) de HE</h3>
           <div id="campo_nombres">
             <label for="he"></label>
             <input type="text" id="he" name="he" placeholder="Ingrese nro(s) HE" required autocomplete="off" pattern="([0-9]+(,[0-9]+)*){1,50}">
-            <input type="submit" value="Descargar">
+            <input type="submit" id="botondescarga" value="Descargar">
             <p id="nota">Nota: ¡Si son 2 o más HE, separarlos por comas sin espacios!</p>
           </div>
       </form>

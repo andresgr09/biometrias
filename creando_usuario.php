@@ -83,11 +83,11 @@ class Usuario {
    
 
 
-        // Hash de la contraseña
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
         // Generar un hash único para confirmación de cuenta
-        $hash = md5(rand(0,1000));
+        $randomBytes = random_bytes(16); // 16 bytes para un hash seguro
+        $hash = bin2hex($randomBytes); // Convierte los bytes en una cadena hexadecimal
 
         $db->begin_transaction();
 
@@ -134,7 +134,8 @@ class CorreoConfirmacion {
         global $db;
 
         // Generar un identificador único y aleatorio
-        $identifier = uniqid();
+        $randomBytes = random_bytes(16); // Genera 16 bytes aleatorios
+        $identifier = bin2hex($randomBytes); // Convierte los bytes en una cadena hexadecimal
 
         // Guardar el identificador y el hash en la base de datos
         $sql_insert = "INSERT INTO hash_identificador (hash,identificador) VALUES ('$hash', '$identifier')";
