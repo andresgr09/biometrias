@@ -64,3 +64,9 @@ h1{
 #botondescarga:hover{
   background-color: #061f8b;
 }
+
+#quitar {
+  position: absolute;
+  left: 0;
+  margin-left: 10px; /* Ajusta este valor según tus necesidades */
+}

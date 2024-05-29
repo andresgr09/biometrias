@@ -45,8 +45,6 @@ class Usuario{
             echo "<option value='$ddocumento'> $nnombres $aapellidos</option>";
         
         
-            
-           
         }
         echo "</select>";
         
@@ -83,7 +81,7 @@ $final->asignar_rol();
 
 ?>
 
-
+<p><a href='..\front_end\mis_funciones.php'id="quitar" class='btn btn-primary' role='button'>quitar permisos</a></p>
 
 
 
