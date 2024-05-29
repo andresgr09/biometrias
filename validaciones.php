@@ -1,5 +1,12 @@
 <?php
 
+function validarHE($numeros) {
+    // Eliminar espacios en blanco al inicio y al final
+    $numeros = trim($numeros);
+    // Validar el patrón de HE (números separados por comas, sin espacios)
+    $patron = '/^([0-9]+(,[0-9]+)*){1,50}$/';
+    return preg_match($patron, $numeros);
+}
 function validarNombres($nombres) {
     // Expresión regular para permitir solo letras, espacios y acentos en los nombres
     $patron = "/^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ\s]+$/";

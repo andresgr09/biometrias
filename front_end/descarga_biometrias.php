@@ -17,7 +17,7 @@
       <br>
       <h1 style='text-align:center'>Descarga Bíometria(s)</h1>
 
-      <form action="descargando_biometrias1.php" method="POST">
+      <form action="descargando_biometrias_dt.php" method="POST">
     <h3>Ingrese nro(s) de HE</h3>
           <div id="campo_nombres">
             <label for="he"></label>

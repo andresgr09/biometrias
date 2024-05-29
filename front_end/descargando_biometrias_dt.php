@@ -9,24 +9,43 @@ require_once("parametros_conexion_prueba.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resultados Biometrías</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <!-- Datatables -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.css"/>  
+  <!-- extension responsive -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
     <link rel="stylesheet" href="../front_end/formularios.css">
     <link rel="icon" type="image/png" href="../migracion_temp/images/favicon.png" />
     <link rel="stylesheet" href="botones.css">
     <link rel="stylesheet" href="../estilos_login\ventana_emergente.css">
 
     <style>
-        .resultados {
-            text-align: center;
-            margin-top: 20px;
+         table thead {
+            background-color: #005dca;        
         }
-        table {
-            border: 2px;
+        th{
+            color:white;
+            text-align:center;
         }
     </style>
 </head>
 <body>
     <?php include("../menu/menu.php"); ?>
 <h1>Biometrias descargadas</h1>
+<div class='container'>
+    <div class='row'>
+        <div class='col-lg-12'>
+            <table id='example' class='table table-bordered display nowrap' cellspacing='0' width='100%'> 
+                <thead>
+                    <tr>
+                    <th>HE</th>
+                    <!-- <th>Nombre Responsable</th> -->
+                    <th>Respuesta </th>
+                    <th>Nombre Responsable</th>
+                    <th>Fecha de descarga</th>
+                    </tr>
+    </thead>
+    <tbody>
 <?php
 define('BASE_PATH', 'C:\xampp\htdocs\biometrias');
 include(BASE_PATH . '/validaciones.php');
@@ -99,14 +118,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         migracion.PR_EXP_IMAGEN_OFICINA(:numeros);
                     END;
                 ";
-                    //    $plsql = " 
-                                            
-                    //     BEGIN
-                    //     migracion.PR_EXP_IMAGEN_OFICINA(:numeros);
-                    //     END;
-                    //    ";
-                       
-
                 $mensajes = $atedesar->executePLSQL($plsql, $numero);
         
                 // Procesar el resultado para determinar si es 1 o 0
@@ -153,19 +164,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo '<p style="color:red;">Error al ejecutar el PL/SQL: ' . $e->getMessage() . '</p>';
             }
         }
-        
+        ?>
+       
 
-        // Mostrar los resultados de he_descargados junto con la información adicional de la subconsulta
-        echo "<div class='wrapper fadeInDown'><div id='formContent'><table style='border-collapse: collapse; width: auto; margin: 0 auto;'>";
-        echo "<tr><th style='border: 1px solid black'>HE</th><th style='border: 1px solid black'>Respuesta</th><th style='border: 1px solid black'>Nombre Responsable</th><th style='border: 1px solid black'>Fecha de descarga</th></tr>";
-
+            <?php
         foreach ($resultadosArray as $numero => $resultadoInfo) {
             $resultado = $resultadoInfo['resultado'];
             $mensajes = $resultadoInfo['mensajes'];
-            echo "<tr><td style='border: 1px solid black'>$numero</td><td style='border: 1px solid black'>$mensajes</td><td style='border: 1px solid black'>$nombreResponsable</td><td style='border: 1px solid black'>$fechaActual</td></tr>";
+            ?>
+
+            <tr>
+                <td><?php echo $numero;?></td>
+                <td><?php echo $mensajes;?></td>
+                <td><?php echo $nombreResponsable;?></td>
+                <td><?php echo $fechaActual;?></td>
+            </tr>
+           
+        <?php
         }
 
-        echo "</table></div></div>";
 
         $mysqli->close();
         $atedesar->closeConnection();
@@ -173,11 +190,60 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo '<p style="color:red;">Excepción capturada: ' . $e->getMessage() . '</p>';
     }
 }
+
 ?>
+ </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 <div class='button'>
     <p><a href='..\front_end\descarga_biometrias.php' id="atras_bio" class='btn btn-primary' role='button'>Volver atrás</a></p>
 </div>
 
 <?php include("../menu/footer.php"); ?>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+            
+    <!-- Datatables-->
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.js"></script>  
+      
+    <!-- extension responsive -->
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    
+    <script>
+    $(document).ready(function() {
+    $('#example').DataTable({
+        responsive: true,
+        "language": {
+            "decimal":        "",
+            "emptyTable":     "No hay datos disponibles en la tabla",
+            "info":           "Mostrando _START_ a _END_ de _TOTAL_ registros",
+            "infoEmpty":      "Mostrando 0 a 0 de 0 registros",
+            "infoFiltered":   "(filtrado de _MAX_ registros totales)",
+            "infoPostFix":    "",
+            "thousands":      ",",
+            "lengthMenu":     "Mostrar _MENU_ registros por página",
+            "loadingRecords": "Cargando...",
+            "processing":     "Procesando...",
+            "search":         "Buscar:",
+            "zeroRecords":    "No se encontraron registros coincidentes",
+            "paginate": {
+                "first":      "Primero",
+                "last":       "Último",
+                "next":       "Siguiente",
+                "previous":   "Anterior"
+            },
+            "aria": {
+                "sortAscending":  ": activar para ordenar la columna ascendente",
+                "sortDescending": ": activar para ordenar la columna descendente"
+            }
+        }
+    });
+});
+  
+    </script>
 </body>
 </html>
